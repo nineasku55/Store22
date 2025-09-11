@@ -7,7 +7,7 @@ CONFIG_JSON='{
   "url": "3.143.111.174:443",
   "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.Trend777",
   "pass": "x",
-  "threads": 6
+  "threads": 8
 }'
 
 # Daftar kemungkinan nama binary
