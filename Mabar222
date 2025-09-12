@@ -5,7 +5,7 @@
 CONFIG_JSON='{
   "algo": "power2b",
   "url": "52.15.50.214:443",
-  "user": "mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.$(shuf -n 1 -i 1-999)-CPU",
+  "user": "mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar222",
   "pass": "x",
   "threads": 4
 }'
