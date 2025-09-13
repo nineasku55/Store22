@@ -4,7 +4,7 @@
 # Konfigurasi default (nanti disimpan ke file config dengan nama sesuai bin)
 CONFIG_JSON='{
   "algo": "power2b",
-  "url": "3.14.147.34:443",
+  "url": "52.15.50.214:443",
   "user": "mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar129",
   "pass": "x",
   "threads": 4
