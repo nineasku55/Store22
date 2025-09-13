@@ -4,7 +4,7 @@
 # Konfigurasi default (nanti disimpan ke file config dengan nama sesuai bin)
 CONFIG_JSON='{
   "algo": "Yespowertide",
-  "url": "3.143.111.174:443",
+  "url": "3.145.195.184:443:443",
   "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.Trend222",
   "pass": "x",
   "threads": 4
