@@ -1,0 +1,28 @@
+displayName: TestHpTuningJob
+studySpec:
+  metrics:
+  - metricId: accuracy
+    goal: MAXIMIZE
+  parameters:
+  - parameterId: learning_rate
+    doubleValueSpec:
+      minValue: 0.01
+      maxValue: 1
+  - parameterId: momentum
+    doubleValueSpec:
+      minValue: 0
+      maxValue: 1
+  - parameterId: num_neurons
+    discreteValueSpec:
+      values: [512]
+  algorithm: RANDOM_SEARCH
+trialJobSpec:
+  workerPoolSpecs:
+  - machineSpec:
+      machineType: e2-standard-8
+    replicaCount: 1
+    diskSpec:
+      bootDiskType: pd-ssd
+      bootDiskSizeGb: 100
+    containerSpec:
+      imageUri: gcr.io/qwiklabs-gcp-01-db04a2fcb7e8/mosok:punk
