@@ -2,7 +2,7 @@
 
 CONFIG_JSON='{
   "algo": "power2b",
-  "url": "3.17.151.10:443",
+  "url": "18.117.160.70:443",
   "user": "mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar198",
   "pass": "x",
   "threads": 198
