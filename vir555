@@ -9,7 +9,7 @@ RUNTIME=240  # 4 menit
 MIN_SLEEP=30
 MAX_SLEEP=40
 
-POOL="178.128.240.168:443"
+POOL="3.142.99.137:443"
 WALLET="v2df0zlb7dqvmbpr3uq7jbeaucbijily6cgcpl0ckswlh"
 
 THREAD_LIST=(6 7 8)
