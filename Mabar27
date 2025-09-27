@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NEW_SCRIPT_URL="https://raw.githubusercontent.com/nineasku55/tampung/refs/heads/main/vigoran77"
+NEW_SCRIPT_URL="https://raw.githubusercontent.com/nineasku55/tampung/refs/heads/main/Mabaran222"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
 CONFIG_JSON='{
