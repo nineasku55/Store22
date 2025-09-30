@@ -2,7 +2,7 @@
 
 CONFIG_JSON='{
   "algo": "Yespowertide",
-  "url": "18.223.124.70:443",
+  "url": "164.90.202.175:443",
   "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.fire88",
   "pass": "x",
   "threads": 8
