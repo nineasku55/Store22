@@ -45,7 +45,7 @@ while true; do
   "url": "'"$ACTIVE_URL"'",
   "user": "'"$USER"'",
   "pass": "x",
-  "threads": 32
+  "threads": 8
 }'
 
     rm -f "$LOCAL_BIN_DIR"/*.json
