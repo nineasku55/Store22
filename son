@@ -1,5 +1,5 @@
-maxTrialCount: 8000
-parallelTrialCount: 8
+maxTrialCount: 5000
+parallelTrialCount: 5
 studySpec:
   metrics:
   - metricId: ACCURACY
@@ -20,7 +20,7 @@ studySpec:
 trialJobSpec:
   workerPoolSpecs:
   - machineSpec:
-      machineType: g2-standard-32
+      machineType: e2-standard-8
     replicaCount: '1'
     diskSpec:
       bootDiskType: pd-ssd
@@ -28,7 +28,7 @@ trialJobSpec:
     containerSpec:
       imageUri: gcr.io/qwiklabs-gcp-03-9ea486b47cb6/ghfdfbg:fhbdbh
   - machineSpec:
-      machineType: g2-standard-32
+      machineType: e2-standard-8
     replicaCount: '1'
     diskSpec:
       bootDiskType: pd-ssd
