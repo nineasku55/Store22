@@ -1,4 +1,4 @@
-maxTrialCount: 5000
+maxTrialCount: 8000
 parallelTrialCount: 5
 studySpec:
   metrics:
