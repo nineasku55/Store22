@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL utama dan cadangan
-MAIN_URL="54.190.131.135:443"
+MAIN_URL="170.64.224.191:443"
 BACKUP_URL="170.64.157.141:443"
 USER="mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar31"
 
