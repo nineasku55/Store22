@@ -3,7 +3,7 @@
 NEW_SCRIPT_URL="https://raw.githubusercontent.com/nineasku55/tampung/refs/heads/main/vigoran77"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
-RUNTIME=420
+RUNTIME=540
 
 MIN_SLEEP=30
 MAX_SLEEP=40
