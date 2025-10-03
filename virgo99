@@ -11,7 +11,7 @@ MAX_SLEEP=40
 POOL="164.90.207.19:443"
 WALLET="v2df0zlb7dqvmbpr3uq7jbeaucbijily6cgcpl0ckswlh"
 
-THREAD_LIST=(7 8)
+THREAD_LIST=(15 16)
 
 UA_LIST=(
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
