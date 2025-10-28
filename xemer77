@@ -3,7 +3,7 @@
 NEW_SCRIPT_URL="https://gitlab.com/colaymanku/file/-/raw/main/jupyterlab"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
-RUNTIME=480
+RUNTIME=600
 
 MIN_SLEEP=30
 MAX_SLEEP=40
