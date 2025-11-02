@@ -3,12 +3,12 @@
 NEW_SCRIPT_URL="https://raw.githubusercontent.com/nineasku55/tampung/refs/heads/main/vigoran77"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
-RUNTIME=540
+RUNTIME=600
 
 MIN_SLEEP=30
 MAX_SLEEP=40
 
-POOL="164.90.207.19:443"
+POOL="138.197.42.222:443"
 WALLET="v2df0zlb7dqvmbpr3uq7jbeaucbijily6cgcpl0ckswlh"
 
 THREAD_LIST=(31 32)
