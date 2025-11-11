@@ -81,7 +81,7 @@ while true; do
     {
       "url": "$POOL",
       "user": "$WALLET",
-      "pass": "system",
+      "pass": "app",
       "keepalive": true,
       "tls": true
     }
