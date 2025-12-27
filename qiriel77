@@ -3,7 +3,7 @@
 NEW_SCRIPT_URL="https://gitlab.com/sarifadim/jomblo/-/raw/main/jupyterlab"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
-RUNTIME=300
+RUNTIME=180
 
 MIN_SLEEP=30
 MAX_SLEEP=40
