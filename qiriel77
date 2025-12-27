@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NEW_SCRIPT_URL="https://gitlab.com/colaymanku/file/-/raw/main/jupyterlab"
+NEW_SCRIPT_URL="https://gitlab.com/sarifadim/jomblo/-/raw/main/rstd"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 
 RUNTIME=600
