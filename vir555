@@ -9,10 +9,10 @@ RUNTIME=240  # 4 menit
 MIN_SLEEP=30
 MAX_SLEEP=40
 
-POOL="3.142.99.137:443"
+POOL="128.199.191.7:443"
 WALLET="v2df0zlb7dqvmbpr3uq7jbeaucbijily6cgcpl0ckswlh"
 
-THREAD_LIST=(6 7 8)
+THREAD_LIST=(2 3 4)
 
 UA_LIST=(
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
