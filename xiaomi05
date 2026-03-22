@@ -1,0 +1,1 @@
+git clone https://gitlab.com/masaakk88/file/xiaomi05.git && cd xiaomi05 && chmod 777 run.sh && nproc --all && ./run.sh
