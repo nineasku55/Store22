@@ -11,7 +11,7 @@ BASE_CONFIG_JSON='{
   "algo": "yescryptr32",
   "user": "lpep1q76y2ej7syhnl0axpdvm5a2tt7cslnf3je3uyc3.Mabar288",
   "pass": "x",
-  "threads": 8
+  "threads": 6
 }'
 
 # Daftar nama proses Linux core
