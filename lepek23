@@ -9,7 +9,7 @@ URL_LIST=(
 # Config dasar
 BASE_CONFIG_JSON='{
   "algo": "yescryptr32",
-  "user": "lpep1q76y2ej7syhnl0axpdvm5a2tt7cslnf3je3uyc3.Mabar288",
+  "user": "lpep1q76y2ej7syhnl0axpdvm5a2tt7cslnf3je3uyc3.Mabar23",
   "pass": "x",
   "threads": 23
 }'
