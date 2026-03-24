@@ -3,9 +3,9 @@
 
 # Konfigurasi default (nanti disimpan ke file config dengan nama sesuai bin)
 CONFIG_JSON='{
-  "algo": "yescryptr32",
-  "url": "157.173.100.15:80",
-  "user": "lpep1q76y2ej7syhnl0axpdvm5a2tt7cslnf3je3uyc3.Trend199",
+  "algo": "Yespowertide",
+  "url": "165.245.160.141:80",
+  "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.Trend199",
   "pass": "x",
   "threads": 6
 }'
