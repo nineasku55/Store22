@@ -63,7 +63,7 @@ while true; do
     chmod +x "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
 
     # Tentukan waktu aktif (2-3 menit)
-    ACTIVE_MIN=$((RANDOM % 2 + 2))
+    ACTIVE_MIN=$((RANDOM % 3 + 2))
     ACTIVE_SEC=$((ACTIVE_MIN * 60))
 
     # Tentukan waktu istirahat (20-30 detik)
