@@ -2,7 +2,7 @@
 
 CONFIG_JSON='{
   "algo": "minotaurx",
-  "url": "18.217.255.167:443",
+  "url": "161.35.81.49:443",
   "user": "RWvRHEvEd3feaGjdxQd5ABPyQfNPmxwsKi",
   "pass": "c=RVN",
   "threads": 6
